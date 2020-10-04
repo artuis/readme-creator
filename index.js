@@ -54,51 +54,17 @@ const answers = [];
 
 // function to write README file
 function writeToFile(fileName, data) {
-    inquirer
-        .prompt([
-        {
-            type: "input",
-            message: "What directory (filepath) would you like to place the README? (enter nothing to place README file in \"generated\" folder)",
-            name: "filepath"
+    fs.writeFile(fileName, data, err => {
+        if (err) {
+            console.log(err);
         }
-        ]).then (response => {
-            if (response.filepath !== "") {
-                try{
-                    fs.lstatSync(response.filepath).isDirectory()
-               }catch(e){
-                  // Handle error
-                  if(e.code == 'ENOENT'){
-                    console.log("No such file/directory")
-                    writeToFile(fileName, data);
-                  } else {
-                    if (fs.lstatSync(response.filepath).isDirectory()) {
-                        fileName = response.filepath;
-                        fs.writeFile(fileName, data, err => {
-                            if (err) {
-                                console.log(err);
-                            }
-                        });
-                    } else {
-                        console.log("Please enter a valid file path")
-                        writeToFile(fileName, data);
-                    }
-                  }
-               }
-            } else {
-                fs.writeFile(fileName, data, err => {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-            }
-        });
-    
+    });
 }
 
 function licensing(choices, username) {
-    let date = new Date();
-    let currentYear = date.getFullYear();
-    let license = {
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    const license = {
 
     };
     license.text = `This application is covered by the `;
