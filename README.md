@@ -2,7 +2,7 @@
 
 ## Description
 
-description description
+describe description descriptor
 
 # Table of Contents
 
@@ -15,15 +15,15 @@ description description
 
 ## INSTALLATION
 
-install install
+install instructions
 
 ## Usage
 
-use this use that
+use info use no info use some info
 
 ## License
 
-MIT
+mit
 
 ## Contributing
 
@@ -33,6 +33,6 @@ test test test
 
 ## Questions
 
-GitHub: https://github.com/github/
+GitHub: https://github.com/git/
 
-Email: email@email.com
+Email: email@email.email

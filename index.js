@@ -61,7 +61,7 @@ function writeToFile(fileName, data) {
 }
 
 function licensing(choices) {
-    return "MIT";
+    return "mit";
 }
 
 // function to initialize program
