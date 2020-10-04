@@ -54,11 +54,45 @@ const answers = [];
 
 // function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
-        if (err) {
-            console.log(err);
+    inquirer
+        .prompt([
+        {
+            type: "input",
+            message: "What directory (filepath) would you like to place the README? (enter nothing to place README file in \"generated\" folder)",
+            name: "filepath"
         }
-    });
+        ]).then (response => {
+            if (response.filepath !== "") {
+                try{
+                    fs.lstatSync(response.filepath).isDirectory()
+               }catch(e){
+                  // Handle error
+                  if(e.code == 'ENOENT'){
+                    console.log("No such file/directory")
+                    writeToFile(fileName, data);
+                  } else {
+                    if (fs.lstatSync(response.filepath).isDirectory()) {
+                        fileName = response.filepath;
+                        fs.writeFile(fileName, data, err => {
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    } else {
+                        console.log("Please enter a valid file path")
+                        writeToFile(fileName, data);
+                    }
+                  }
+               }
+            } else {
+                fs.writeFile(fileName, data, err => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    
 }
 
 function licensing(choices, username) {
@@ -67,31 +101,34 @@ function licensing(choices, username) {
     let license = {
 
     };
-    let licenseSent = `This application is covered by the [MIT License](https://opensource.org/licenses/MIT)
-
-    Copyright ${currentYear} ${username}`
+    license.text = `This application is covered by the `;
     switch (choices) {
         case "MIT":
-            license.text = "[MIT License](https://opensource.org/licenses/MIT)";
+            license.text += "[MIT License](https://opensource.org/licenses/MIT)";
             license.badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
             break;
         case "GPLv3":
-            license.text = "[GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)"
+            license.text += "[GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)"
             license.badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
             break;
         case "GPLv2":
-            license.text = "[GNU General Public License, version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)"
-            license.badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+            license.text += "[GNU General Public License, version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)"
+            license.badge += "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
             break;
         case "Apache 2.0":
-            license.text = "[Apache License, version 2.0](https://www.apache.org/licenses/LICENSE-2.0)"
+            license.text += "[Apache License, version 2.0](https://www.apache.org/licenses/LICENSE-2.0)"
             license.badge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
             break;
         default: // user selected no
             license.text = "None";
             license.badge = "";
+            return license;
             break;
     }
+    license.text += 
+    `
+
+Copyright ${currentYear} ${username}`
     return license;
 }
 
@@ -143,7 +180,7 @@ ${response.test}
 GitHub: https://github.com/${response.github}/
 
 Email: ${response.email}`
-            writeToFile("README.md", out)
+            writeToFile("./generated/README.md", out)
         })
 };
 
