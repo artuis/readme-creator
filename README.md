@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Title
+# title title
 
 ## Description
 
@@ -20,7 +19,7 @@ install install
 
 ## Usage
 
-use use
+use this use that
 
 ## License
 
@@ -30,46 +29,10 @@ MIT
 
 ## Tests
 
-test this test that
+test test test
 
 ## Questions
 
-GitHub: https://github.com/git/
+GitHub: https://github.com/github/
 
-Email: email@email.email
-=======
-# TITLE
-
-## Description
-
-# Table of Contents
-
- * [Installation](#installation)
- * [Usage](#usage)
- * [License](#license)
- * [Contributing](#contributing)
- * [Tests](#tests)
- * [Questions](#questions)
-
-## INSTALLATION
-
-Placeholder
-
-## Usage
-
-Placeholder
-
-## License
-
-Placeholder
-
-## Contributing
-
-Placeholder
-
-## Tests
-
-## Questions
-
-Placeholder
->>>>>>> 55e1b70bfad11e76d4932e44330ee5fb83d9e53e
+Email: email@email.com
