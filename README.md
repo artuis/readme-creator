@@ -27,6 +27,8 @@ Run the application using Node.js by typing "node index.js" inside the command l
 
 ## Contributing
 
+Report issues or suggest enhancements in the "Issues" tab of the GitHub repo.
+
 ## Tests
 
 Currently, no automated tests are available to test the application, though you are free to make your own

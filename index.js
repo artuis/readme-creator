@@ -132,6 +132,8 @@ ${license.text}
 
 ## Contributing
 
+${response.contribution}
+
 ## Tests
 
 ${response.test}
